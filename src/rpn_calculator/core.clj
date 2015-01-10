@@ -9,3 +9,6 @@
 
 (defn calculate [string]
   0)
+
+(defn parse[string]
+  '+)

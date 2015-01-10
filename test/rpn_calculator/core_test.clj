@@ -26,5 +26,5 @@
 
  (fact
   "it should parse the operator at the end"
-  (parse "+") => +)
+  (parse "+") => '+)
  )
