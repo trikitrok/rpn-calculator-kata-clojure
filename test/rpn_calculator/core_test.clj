@@ -13,3 +13,10 @@
    (= 0 0) => true
  )
 
+(facts
+ "about the RPN calculator"
+
+ (fact
+    "it should sum numbers"
+    (sum "0 0 +") => 0
+  ))
