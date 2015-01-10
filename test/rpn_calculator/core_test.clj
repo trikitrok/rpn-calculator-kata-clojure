@@ -20,3 +20,11 @@
     "it should sum numbers"
     (calculate "0 0 +") => 0
   ))
+
+(facts
+ "about parsing"
+
+ (fact
+  "it should parse the operator at the end"
+  (parse "+") => +)
+ )
