@@ -7,5 +7,5 @@
   (println "Hello, World!"))
 
 
-(defn sum [string]
+(defn calculate [string]
   0)

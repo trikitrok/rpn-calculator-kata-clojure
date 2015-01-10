@@ -18,5 +18,5 @@
 
  (fact
     "it should sum numbers"
-    (sum "0 0 +") => 0
+    (calculate "0 0 +") => 0
   ))
