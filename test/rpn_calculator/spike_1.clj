@@ -138,3 +138,18 @@ stack
 
 (def simple-expr-seq '(1 2 +))
 (pop simple-expr-seq)
+
+(defn- operator [token]
+  (let [operators {"+" + "-" - "*" * "/" quot}]
+    (get operators token)))
+
+(defn num-representation? [token]
+  (re-find #"\A-?\d+" token))
+
+
+(defn parse-token [token]
+  (if-let [operator (operator token)]
+    operator
+    (if (num-representation? token)
+      (Integer/parseInt token)
+      (throw (Exception. (str "unknown token '" token "'"))))))
