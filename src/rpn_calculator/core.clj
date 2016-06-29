@@ -13,7 +13,12 @@
   (split string #" "))
 
 (defn- operator [token]
-  (let [operators {"+" + "-" - "*" * "/" quot}]
+  (let [operators {
+                   "+" {:fn + :operands 2}
+                   "-" {:fn - :operands 2}
+                   "*" {:fn * :operands 2}
+                   "/" {:fn quot :operands 2}
+                   "~" {:fn - :operands 1}}]
     (get operators token)))
 
 (defn num-representation? [token]
@@ -31,7 +36,10 @@
   [stack symbol]
   (if (number? symbol)
     (conj stack symbol)
-    (conj (pop (pop stack)) (apply symbol (take-last 2 stack)))))
+    (do
+      (let [rest-stack ((apply comp (repeat (:operands symbol) pop)) stack)
+            new-operand (apply (:fn symbol) (take-last (:operands symbol) stack))]
+        (conj rest-stack new-operand)))))
 
 (defn- traverse-tokens [tokens]
   (reduce grow-or-apply [] tokens ))
