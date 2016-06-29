@@ -29,4 +29,7 @@
 
  (fact "it should add three numbers"
        (calculate "1 2 3 + +") => 6)
+
+ (fact "it should not accept wrong input"
+       (calculate "1 2 3 ' +") => nil)
  )
