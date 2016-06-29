@@ -32,12 +32,22 @@
       {:result (Integer/parseInt token)}
       {:result nil :cause (Exception. (str "unknown token '" token "'"))})))
 
+(defn- repeat-reduce
+  "repeats the function f as many times as indicated in n.
+  As is, the function is applied to the output of the previous invocation, so it's a composed operation:
+
+  (repeat-reduce 3 f) =  (f (f (f)))
+  ((repeat-reduce 3 f) x) =  (f (f (f x)))"
+  
+  [n f]
+  (apply comp (repeat n f)))
+
 (defn- grow-or-apply
   [stack symbol]
   (if (number? symbol)
     (conj stack symbol)
     (do
-      (let [rest-stack ((apply comp (repeat (:operands symbol) pop)) stack)
+      (let [rest-stack ((repeat-reduce (:operands symbol) pop) stack)
             new-operand (apply (:fn symbol) (take-last (:operands symbol) stack))]
         (conj rest-stack new-operand)))))
 
