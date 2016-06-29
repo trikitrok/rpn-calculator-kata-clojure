@@ -33,4 +33,8 @@
  (fact "it should not accept wrong input"
        (calculate "1 2 3 ' +") => nil
        (calculate "'") => nil)
+
+ (fact "it should not accept empty expressions"
+       (calculate "") => nil
+       (calculate " ") => nil)
  )
