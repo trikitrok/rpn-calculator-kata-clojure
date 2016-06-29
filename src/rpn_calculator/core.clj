@@ -41,7 +41,11 @@
     (if (empty? (filter #(nil? (:result %)) tokens))
       (->> tokens (map :result) traverse-tokens first)
       (do
-        (doall (map #(log/error (.getMessage (:cause %))) (filter #(nil? (:result %)) tokens)))
+        (->> tokens
+             (filter #(nil? (:result %)))
+             (map #(.getMessage (:cause %)))
+             (map #(log/error %))
+             doall)
         nil))))
 
 
