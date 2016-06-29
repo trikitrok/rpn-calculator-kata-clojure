@@ -40,4 +40,4 @@
 
 
 (defn to-stack [expression]
-  )
+  [])
