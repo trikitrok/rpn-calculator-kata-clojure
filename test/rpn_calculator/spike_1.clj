@@ -66,13 +66,13 @@ stack
 
 (apply-operator - [0 1])
 
-(defn apply-all-operators [stack]
-  (if (= (count stack) 1)
-    (first stack)
-    (apply-all-operators
-      (apply-operator (peek stack) (pop stack)))))
+;(defn apply-all-operators [stack]
+;  (if (= (count stack) 1)
+;    (first stack)
+;    (apply-all-operators
+;      (apply-operator (peek stack) (pop stack)))))
 
-(apply-all-operators [0 1 + 2 +])
+;(apply-all-operators [0 1 + 2 +])
 
 (defn rpn-iterative [operands operator]
   (do
