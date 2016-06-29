@@ -48,6 +48,4 @@
   (let [tokens (->> x split-string (map parse-token))]
     (if (empty? (filter #(nil? (:result %)) tokens))
       (->> tokens (map :result) traverse-tokens first)
-      (do
-        (log-wrong tokens)
-        nil))))
+      (do (log-wrong tokens) nil))))
