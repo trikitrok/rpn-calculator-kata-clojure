@@ -12,16 +12,6 @@
 (defn- split-string [string]
   (split string #" "))
 
-(defn- parse-int [string]
-  (Integer/parseInt string))
-
-(defn- reduce-first-two-with [operator x]
-   (reduce
-         operator
-         (map #(Integer/parseInt %)
-              (take 2
-                (split-string x)))))
-
 (defn parse-token [token]
   (try
     (Integer/parseInt token)
