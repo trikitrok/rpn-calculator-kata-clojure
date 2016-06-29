@@ -1,7 +1,7 @@
 (ns rpn-calculator.core
-  (:gen-class))
+  (:gen-class)
+  (:require [clojure.tools.logging :as log]))
 (use '[clojure.string :only (split)])
-
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
@@ -40,6 +40,10 @@
   (let [tokens (->> x split-string (map parse-token))]
     (if (empty? (filter #(nil? (:result %)) tokens))
       (->> tokens (map :result) traverse-tokens first)
-      nil)))
+      (do
+        (doall (map #(log/error (.getMessage (:cause %))) (filter #(nil? (:result %)) tokens)))
+        nil))))
+
+
 
 

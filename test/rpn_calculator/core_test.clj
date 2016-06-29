@@ -37,6 +37,7 @@
   (fact
     "it should not accept wrong input"
     (calculate "1 2 3 ' +") => nil
+    (calculate "_") => nil
     (calculate "'") => nil)
 
   (fact
