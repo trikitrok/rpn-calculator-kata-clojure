@@ -40,14 +40,10 @@
   (reduce grow-or-apply [] tokens ))
 
 
-(defn- apply-operators
-  [tokens]
-  (traverse-tokens tokens))
-
 (defn calculate [x]
   (->> x
-      split-string
-      (map parse-token)
-      apply-operators
-      first))
+       split-string
+       (map parse-token)
+       traverse-tokens
+       first))
 
