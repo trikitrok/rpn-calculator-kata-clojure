@@ -35,4 +35,7 @@
   "about the stack parser"
 
   (fact "parse an empty expression"
-        (to-stack "") => []))
+        (to-stack "") => [])
+
+  (fact "parse an expression with a single operand"
+        (to-stack "1") => [1]))
