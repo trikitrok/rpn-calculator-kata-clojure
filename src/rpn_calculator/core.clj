@@ -29,11 +29,9 @@
 (defn- traverse-tokens [tokens]
   (reduce grow-or-apply [] tokens ))
 
-
 (defn calculate [x]
-  (->> x
-       split-string
-       (map parse-token)
-       traverse-tokens
-       first))
+  (let [tokens (->> x split-string (map parse-token))]
+    (if (not-empty (filter #(nil? %) tokens))
+      nil
+      (->> tokens traverse-tokens first))))
 
