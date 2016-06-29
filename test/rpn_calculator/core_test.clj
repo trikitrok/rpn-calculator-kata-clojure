@@ -38,4 +38,7 @@
         (to-stack "") => [])
 
   (fact "parse an expression with a single operand"
-        (to-stack "1") => [1]))
+        (to-stack "1") => [1])
+
+  (fact "parse an expression with a single operand and an operator"
+        (to-stack "1 +") => [1 +]))
