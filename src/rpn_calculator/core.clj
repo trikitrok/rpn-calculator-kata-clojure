@@ -40,4 +40,9 @@
 
 
 (defn to-stack [expression]
-  [])
+  (if (empty? expression) []
+  (let [stack []]
+    (vec
+         (map #(Integer/parseInt %)
+              (split-string expression))))))
+
