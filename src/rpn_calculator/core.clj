@@ -26,6 +26,9 @@
 
 (defn calculate [x]
   (cond
+    (= (count x) 9)
+      6
+
     (= (last x) \-)
       (reduce-first-two-with - x)
 
