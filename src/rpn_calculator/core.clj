@@ -36,16 +36,20 @@
 (defn- traverse-tokens [tokens]
   (reduce grow-or-apply [] tokens ))
 
+(defn- log-wrong
+  [tokens]
+  (->> tokens
+       (filter #(nil? (:result %)))
+       (map #(.getMessage (:cause %)))
+       (map #(log/error %))
+       doall))
+
 (defn calculate [x]
   (let [tokens (->> x split-string (map parse-token))]
     (if (empty? (filter #(nil? (:result %)) tokens))
       (->> tokens (map :result) traverse-tokens first)
       (do
-        (->> tokens
-             (filter #(nil? (:result %)))
-             (map #(.getMessage (:cause %)))
-             (map #(log/error %))
-             doall)
+        (log-wrong tokens)
         nil))))
 
 
