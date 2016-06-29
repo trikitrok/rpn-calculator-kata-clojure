@@ -45,5 +45,9 @@
   (traverse-tokens tokens))
 
 (defn calculate [x]
-  (first (apply-operators (map parse-token (split-string x)))))
+  (->> x
+      split-string
+      (map parse-token)
+      apply-operators
+      first))
 
