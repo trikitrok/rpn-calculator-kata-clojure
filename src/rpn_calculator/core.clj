@@ -38,7 +38,7 @@
 
   (repeat-reduce 3 f) =  (f (f (f)))
   ((repeat-reduce 3 f) x) =  (f (f (f x)))"
-  
+
   [n f]
   (apply comp (repeat n f)))
 

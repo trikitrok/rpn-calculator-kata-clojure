@@ -36,7 +36,8 @@
 
   (fact
     "negative operator (~) takes only one argument"
-    (calculate "1 ~") => -1)
+    (calculate "1 ~") => -1
+    (calculate "2 1 ~ +") => 1)
 
   (fact
     "it should not accept wrong input"
