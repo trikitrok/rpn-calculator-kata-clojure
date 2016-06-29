@@ -4,7 +4,7 @@
   :license {:name "GNU GPL V3"
             :url "http://www.gnu.org/licenses/gpl-3.0.txt"}
   :dependencies [
-                 [org.clojure/clojure "1.6.0"]
+                 [org.clojure/clojure "1.8.0"]
                  ]
   :main ^:skip-aot rpn-calculator.core
   :target-path "target/%s"
