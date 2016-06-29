@@ -22,21 +22,6 @@
               (take 2
                 (split-string x)))))
 
-
-
-(defn calculate [x]
-  (cond
-    (= (count x) 9)
-      6
-
-    (= (last x) \-)
-      (reduce-first-two-with - x)
-
-    (= (last x) \+)
-       (reduce-first-two-with + x)
-
-    :else (parse-int x)))
-
 (defn parse-token [token]
   (try
     (Integer/parseInt token)
@@ -45,10 +30,20 @@
         (if-let [op (get operators token)]
           op)))))
 
-(defn to-stack [expression]
-  (if (empty? expression)
-    []
-    (vec
-      (map parse-token
-           (split-string expression)))))
+(defn- grow-or-apply
+  [stack symbol]
+  (if (number? symbol)
+    (conj stack symbol)
+    (conj (pop (pop stack)) (apply symbol (take-last 2 stack)))))
+
+(defn- traverse-tokens [tokens]
+  (reduce grow-or-apply [] tokens ))
+
+
+(defn- apply-operators
+  [tokens]
+  (traverse-tokens tokens))
+
+(defn calculate [x]
+  (first (apply-operators (map parse-token (split-string x)))))
 
