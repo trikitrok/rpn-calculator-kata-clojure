@@ -35,6 +35,10 @@
     (calculate "1 2 3 + +") => 6)
 
   (fact
+    "negative operator (~) takes only one argument"
+    (calculate "1 ~") => -1)
+
+  (fact
     "it should not accept wrong input"
     (calculate "1 2 3 ' +") => nil
     (calculate "_") => nil
