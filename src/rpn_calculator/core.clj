@@ -31,7 +31,8 @@
 
 (defn calculate [x]
   (let [tokens (->> x split-string (map parse-token))]
-    (if (not-empty (filter #(nil? %) tokens))
-      nil
-      (->> tokens traverse-tokens first))))
+    (if (empty? (filter #(nil? %) tokens))
+      (->> tokens traverse-tokens first)
+      nil)))
+
 
