@@ -40,7 +40,7 @@
 (defn parse-token [token]
   (try
     (Integer/parseInt token)
-    (catch Exception _
+    (catch NumberFormatException _
       (let [operators {"+" + "-" - "*" * "/" quot}]
         (if-let [op (get operators token)]
           op)))))
