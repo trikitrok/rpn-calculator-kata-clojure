@@ -30,3 +30,9 @@
  (fact "it should add three numbers"
        (calculate "1 2 3 + +") => 6)
  )
+
+(facts
+  "about the stack parser"
+
+  (fact "parse an empty expression"
+        (to-stack "") => []))

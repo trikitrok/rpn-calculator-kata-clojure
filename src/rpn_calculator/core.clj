@@ -39,4 +39,5 @@
 
 
 
-
+(defn to-stack [expression]
+  )
