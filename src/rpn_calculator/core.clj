@@ -43,6 +43,11 @@
   (if (empty? expression)
     []
     (vec
-      (map #(Integer/parseInt %)
+      (map #(try
+             (Integer/parseInt %)
+             (catch Exception e
+             (let [operators {"+" + "-" - "*" * "/" quot}]
+              (if-let [op (get operators %)]
+               op))))
            (split-string expression)))))
 
