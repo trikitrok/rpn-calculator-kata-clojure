@@ -37,17 +37,18 @@
 
     :else (parse-int x)))
 
-
+(defn parse-token [token]
+  (try
+    (Integer/parseInt token)
+    (catch Exception e
+      (let [operators {"+" + "-" - "*" * "/" quot}]
+        (if-let [op (get operators token)]
+          op)))))
 
 (defn to-stack [expression]
   (if (empty? expression)
     []
     (vec
-      (map #(try
-             (Integer/parseInt %)
-             (catch Exception e
-             (let [operators {"+" + "-" - "*" * "/" quot}]
-              (if-let [op (get operators %)]
-               op))))
+      (map parse-token
            (split-string expression)))))
 
