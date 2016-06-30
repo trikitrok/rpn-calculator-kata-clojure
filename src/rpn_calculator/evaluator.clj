@@ -1,10 +1,7 @@
 (ns rpn-calculator.evaluator)
 
 (defn- remove-used [stack]
-  (let [stack-minus-one-element (pop stack)]
-    (if (empty? stack-minus-one-element)
-      stack-minus-one-element
-      (pop stack-minus-one-element))))
+  (vec (butlast (butlast stack))))
 
 (defn- process-symbol [stack symbol]
   (if (number? symbol)
