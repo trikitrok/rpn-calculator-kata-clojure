@@ -5,8 +5,10 @@
 (defn- num-representation? [token]
   (re-find #"\A-?\d+" token))
 
-(defn parse-token [token]
-  (if-let [operator (get {"+" + "-" - "*" * "/" /} token)]
+(def ^:private operators {"+" + "-" - "*" * "/" /})
+
+(defn- parse-token [token]
+  (if-let [operator (get operators token)]
     operator
     (if (num-representation? token)
       (Integer/parseInt token)
