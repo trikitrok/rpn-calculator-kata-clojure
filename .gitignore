@@ -7,7 +7,6 @@ pom.xml.asc
 *.class
 /.lein-*
 /.nrepl-port
-README.md
 doc
 .idea/
 *.iml
