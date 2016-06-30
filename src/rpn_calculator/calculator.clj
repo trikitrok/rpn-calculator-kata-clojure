@@ -7,9 +7,10 @@
 
 (defn calculate [logger expression]
   (if (blank? expression)
-    (do (logger/log-empty-expression logger) nil)
+    (logger/log-empty-expression logger)
     (let [symbols (parser/parse-expression expression)]
       (if (parser/correct-expression? symbols)
         (evaluator/evaluate symbols)
-        (do (logger/log-invalid-tokens logger (parser/invalid-symbols symbols)) nil)))))
+        (logger/log-invalid-tokens
+          logger (parser/invalid-symbols symbols))))))
 

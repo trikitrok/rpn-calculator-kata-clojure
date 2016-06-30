@@ -10,9 +10,11 @@
 (defrecord FakeErrorsLogger [logged-errors]
   logger/ErrorsLogger
   (log-invalid-tokens [_ errors]
-    (swap! logged-errors conj errors))
+    (swap! logged-errors conj errors)
+    nil)
   (log-empty-expression [_]
-    (swap! logged-errors conj :empty-expression)))
+    (swap! logged-errors conj :empty-expression)
+    nil))
 
 (defn fake-errors-logger [an-atom]
   (->FakeErrorsLogger an-atom))

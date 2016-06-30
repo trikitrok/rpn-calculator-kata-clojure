@@ -10,7 +10,9 @@
   ErrorsLogger
   (log-invalid-tokens [_ errors]
     (doseq [error errors]
-      (log/error (str "unknown token '" (:invalid-token error) "'"))))
+      (log/error (str "unknown token '" (:invalid-token error) "'"))
+      nil))
 
   (log-empty-expression [_]
-    (log/error "empty expression")))
+    (log/error "empty expression")
+    nil))
