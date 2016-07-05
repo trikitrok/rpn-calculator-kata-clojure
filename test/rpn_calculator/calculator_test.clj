@@ -32,7 +32,8 @@
       (fact
         "with negative numbers"
         (calculate "1 -") => -1
-        (calculate "1 - 2 +") => 1)
+        (calculate "1 - 2 +") => 1
+        (calculate "3 - 1 +") => -2)
 
       (fact
         "multiplying several numbers"
@@ -53,10 +54,4 @@
         (calculate (helpers/fake-errors-logger logged-errors) "1 2 ' 3 4 _ koko +") => nil
         @logged-errors => ['({:invalid-token "'"}
                               {:invalid-token "_"}
-                              {:invalid-token "koko"})]))
-
-    (fact
-      "which are empty"
-      (let [logged-errors (atom [])]
-        (calculate (helpers/fake-errors-logger logged-errors) "") => nil
-        @logged-errors => [:empty-expression]))))
+                              {:invalid-token "koko"})]))))
