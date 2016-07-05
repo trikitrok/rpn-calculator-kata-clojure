@@ -1,7 +1,7 @@
 (ns rpn-calculator.core
   (:gen-class)
   (:require
-    [rpn-calculator.logger :as logger]
+    [rpn-calculator.logging :as logger]
     [rpn-calculator.calculator :as calculator]))
 
 (defn -main [& args]

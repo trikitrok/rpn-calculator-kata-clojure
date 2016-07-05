@@ -33,7 +33,8 @@
         "with negative numbers"
         (calculate "1 -") => -1
         (calculate "1 - 2 +") => 1
-        (calculate "3 - 1 +") => -2)
+        (calculate "3 - 1 +") => -2
+        (calculate "3 1 + -") => -4)
 
       (fact
         "multiplying several numbers"
@@ -46,12 +47,26 @@
         (calculate "10 5 5 / /") => 10)))
 
   (facts
-    "rejects incorrect expressions"
+    "rejects expressions"
 
     (fact
-      "with wrong input"
+      "containing invalid tokens"
       (let [logged-errors (atom [])]
         (calculate (helpers/fake-errors-logger logged-errors) "1 2 ' 3 4 _ koko +") => nil
         @logged-errors => ['({:invalid-token "'"}
                               {:invalid-token "_"}
-                              {:invalid-token "koko"})]))))
+                              {:invalid-token "koko"})]))
+
+    (fact
+      "that are invalid"
+      (let [logged-errors (atom [])]
+        (calculate (helpers/fake-errors-logger logged-errors) "1 2 + +") => nil
+        @logged-errors => ["1 2 + +"])
+
+      (let [logged-errors (atom [])]
+        (calculate (helpers/fake-errors-logger logged-errors) "1 *") => nil
+        @logged-errors => ["1 *"])
+
+      (let [logged-errors (atom [])]
+        (calculate (helpers/fake-errors-logger logged-errors) "/") => nil
+        @logged-errors => ["/"]))))
