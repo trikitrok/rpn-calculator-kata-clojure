@@ -10,7 +10,7 @@
   (facts
     "calculates correct expressions"
 
-    (let [calculate (partial calculate helpers/null-errors-logger)]
+    (let [calculate (partial calculate (helpers/null-errors-logger))]
       (fact
         "with only a number"
         (calculate "0") => 0
@@ -59,14 +59,14 @@
 
     (fact
       "that are invalid"
-      (let [logged-errors (atom [])]
-        (calculate (helpers/fake-errors-logger logged-errors) "1 2 + +") => nil
-        @logged-errors => ["1 2 + +"])
+      (helpers/check-expression-calculation-fails-with-expected-logged-errors
+        calculate "1 2 + +" ["1 2 + +"])
 
-      (let [logged-errors (atom [])]
-        (calculate (helpers/fake-errors-logger logged-errors) "1 *") => nil
-        @logged-errors => ["1 *"])
+      (helpers/check-expression-calculation-fails-with-expected-logged-errors
+        calculate "1 *" ["1 *"])
 
-      (let [logged-errors (atom [])]
-        (calculate (helpers/fake-errors-logger logged-errors) "/") => nil
-        @logged-errors => ["/"]))))
+      (helpers/check-expression-calculation-fails-with-expected-logged-errors
+        calculate "/" ["/"])
+
+      (helpers/check-expression-calculation-fails-with-expected-logged-errors
+        calculate "-" ["-"]))))
